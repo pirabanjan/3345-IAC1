@@ -20,8 +20,8 @@ jobs:
         run: |
           docker build -t my-ml-app .
           docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-          docker tag my-ml-app ${{ secrets.AWS_REGISTRY_URL }}/my-ml-app
-          docker push ${{ secrets.AWS_REGISTRY_URL }}/my-ml-app
+          docker tag my-ml-app ${{ secrets.DOCKER_USERNAME }}/my-ml-app
+          docker push ${{ secrets.DOCKER_USERNAME }}/my-ml-app
 
       - name: SSH into EC2 and pull the latest image
         uses: appleboy/ssh-action@master
@@ -30,8 +30,8 @@ jobs:
           username: ${{ secrets.EC2_USERNAME }}
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
-            docker pull ${{ secrets.AWS_REGISTRY_URL }}/my-ml-app
-            docker run -d -p 80:80 ${{ secrets.AWS_REGISTRY_URL }}/my-ml-app
+            docker pull ${{ secrets.DOCKER_USERNAME }}/my-ml-app
+            docker run -d -p 80:80 ${{ secrets.DOCKER_USERNAME }}/my-ml-app
 
       - name: Copy log file from EC2 to local
         uses: appleboy/scp-action@master
