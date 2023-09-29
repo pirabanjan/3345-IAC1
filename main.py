@@ -7,11 +7,12 @@
 # predicted_class = predict_image(image_path)
 # print(f"Predicted class: {predicted_class}")
 from src.predict import predict_image
+from src.train import train_model
 
 # Call the predict_image function with your image data
 # Replace 'image_path' with the path to your image file
 image_path = '3345-IAC1\gfx100s_sample_04_thum-1.jpg'
-predicted_class = predict_image(image_path)
+predicted_class = predict_image(train_model, image_path)
 
 # Specify the output file path
 output_file_path = 'output.txt'  # Change this to your desired output file path
