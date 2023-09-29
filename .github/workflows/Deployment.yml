@@ -1,9 +1,14 @@
 name: Deploy to AWS EC2
-
+# on:
+#   workflow_run:
+#     workflows: ["Code Coverage"]  # Name of the first workflow
+#     types:
+#       - completed
 on:
   push:
     branches:
       - main
+
 
 jobs:
   deploy:
@@ -30,22 +35,23 @@ jobs:
           username: ${{ secrets.EC2_USERNAME }}
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
+            docker login
             docker pull ${{ secrets.DOCKER_USERNAME }}/my-ml-app
             docker run -d -p 80:80 ${{ secrets.DOCKER_USERNAME }}/my-ml-app
 
-      - name: Copy log file from EC2 to local
-        uses: appleboy/scp-action@master
-        with:
-          host: ${{ secrets.EC2_HOST }}
-          username: ${{ secrets.EC2_USERNAME }}
-          key: ${{ secrets.EC2_SSH_KEY }}
-          source: /path/to/log/file/on/ec2.log  # Update with the correct path
-          target: ./logs/ec2.log  # Update with the desired local path
+      # - name: Copy log file from EC2 to local
+      #   uses: appleboy/ssh-action@master
+      #   with:
+      #     host: ${{ secrets.EC2_HOST }}
+      #     username: ${{ secrets.EC2_USERNAME }}
+      #     key: ${{ secrets.EC2_SSH_KEY }}
+      #     source: /path/to/log/file/on/ec2.log  # Update with the correct path
+      #     target: ./logs/ec2.log  # Update with the desired local path
 
-      - name: Commit and push log file
-        run: |
-          git config user.name "GitHub Actions"
-          git config user.email "<your-email>@example.com"
-          git add ./logs/ec2.log
-          git commit -m "Add log file from EC2"
-          git push
+      # - name: Commit and push log file
+      #   run: |
+      #     git config user.name "GitHub Actions"
+      #     git config user.email "<your-email>@example.com"
+      #     git add ./logs/ec2.log
+      #     git commit -m "Add log file from EC2"
+      #     git push
