@@ -23,7 +23,7 @@ jobs:
       run: pip install -r requirements.txt
 
     - name: test the project
-      run: python /tests/test_classification_project.py  # Replace with the actual command to build your project
+      run: python tests/test_classification_project.py  # Replace with the actual command to build your project
 
     - name: Store build log
       run: |
