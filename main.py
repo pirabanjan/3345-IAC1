@@ -1,7 +1,6 @@
 import os
 from src.predict import predict_image
 from src.train import train_model
-import time
 
 # Get the directory where this script is located
 script_directory = os.path.dirname(os.path.abspath(__file__))
@@ -17,6 +16,9 @@ predicted_classes = []
 
 # Function to process images
 def process_images():
+    # Clear the previous predicted classes
+    predicted_classes.clear()
+
     # Iterate over the image files in the directory
     for filename in os.listdir(image_directory):
         if filename.lower().endswith(('.jpg', '.png', '.jpeg')):
@@ -31,12 +33,6 @@ def process_images():
 
 # Run the process_images function initially
 process_images()
-
-# Run the script in a loop for continuous execution (you can add conditions to exit the loop)
-while True:
-    # Sleep for a while before processing again (adjust the sleep duration as needed)
-    time.sleep(10)  # Sleep for 10 seconds before processing again
-    process_images()
 
 # Write the predicted classes to the output file (if needed)
 with open(output_file_path, 'w') as output_file:
