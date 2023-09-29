@@ -1,0 +1,38 @@
+name: Build and Store Log
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.8  # Replace with your desired Python version
+
+    - name: Install dependencies
+      run: pip install -r requirements.txt
+
+    - name: Build the project
+      run: python main.py  # Replace with the actual command to build your project
+
+    - name: Store build log
+      run: |
+        mkdir -p logs  # Create a directory to store logs
+        mv output.txt logs/  # Move the build log to the logs directory
+      if: success()  # Only run this step if the previous steps were successful
+
+    - name: Upload build log
+      uses: actions/upload-artifact@v2
+      with:
+        name: build-logs
+        path: logs/
+      if: success()  # Only upload logs if the previous steps were successful
