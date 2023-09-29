@@ -35,9 +35,10 @@ jobs:
           username: ${{ secrets.EC2_USERNAME }}
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
-            docker login
             docker pull ${{ secrets.DOCKER_USERNAME }}/my-ml-app
-            docker run -d -p 80:80 ${{ secrets.DOCKER_USERNAME }}/my-ml-app
+            docker stop ml-app
+            docker rm ml-app
+            docker run -d --name ml-app -p 80:80 ${{ secrets.DOCKER_USERNAME }}/my-ml-app
 
       # - name: Copy log file from EC2 to local
       #   uses: appleboy/ssh-action@master
