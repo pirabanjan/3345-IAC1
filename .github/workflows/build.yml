@@ -1,4 +1,4 @@
-name: Build and Store Log
+name: Build
 
 on:
   push:
