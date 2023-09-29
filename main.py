@@ -10,7 +10,7 @@ from src.predict import predict_image
 
 # Call the predict_image function with your image data
 # Replace 'image_path' with the path to your image file
-image_path = 'Image\gfx100s_sample_04_thum-1.jpg'
+image_path = 'Image/gfx100s_sample_04_thum-1.jpg'
 predicted_class = predict_image(image_path)
 
 # Specify the output file path
