@@ -1,1 +1,11 @@
-Predicted class: 9
+File: gfx100s_sample_04_thum-1.jpg, Predicted class: 9
+File: gfx100s_sample_04_thum-1.jpg, Predicted class: 9
+File: gfx100s_sample_04_thum-1.jpg, Predicted class: 9
+File: gfx100s_sample_04_thum-1.jpg, Predicted class: 9
+File: number-5-256x256.jpg, Predicted class: 9
+File: download (1).jpeg, Predicted class: 9
+File: download.jpeg, Predicted class: 9
+File: gfx100s_sample_04_thum-1.jpg, Predicted class: 9
+File: images.jpeg, Predicted class: 9
+File: images.png, Predicted class: 9
+File: number-5-256x256.jpg, Predicted class: 9
